@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   // find all categories w/ findAll()
   // be sure to include its associated Products
   const categories = await Category.findAll({
-    include: { model: Product, as: 'categoryProducts' }
+    include: { model: Product }
   });
   res.json(categories);
 });
@@ -16,7 +16,7 @@ router.get('/:id', async (req, res) => {
   // find one category by its `id` value w/ findByPk()
   // be sure to include its associated Products
   const categories = await Category.findByPk(req.params.id, {
-    include: { model: Product, as: 'categoryProducts' }
+    include: { model: Product}
   });
   res.json(categories);
 });
@@ -39,7 +39,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
-  const categories = await Category.destroy( req.body, {
+  const categories = await Category.destroy( {
   where: { id: req.params.id }
   });
   res.json(categories);
